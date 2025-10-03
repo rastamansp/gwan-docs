@@ -1,0 +1,70 @@
+version: "3.9"
+
+services:
+  docmost:
+    image: docmost/docmost:latest
+    restart: unless-stopped
+    depends_on:
+      - redis
+      - postgres
+    environment:
+      # URL pública
+      APP_URL: "http://localhost:3000"
+      # Gere um segredo forte
+      APP_SECRET: "pazdedeus@2025_gwan_docmost_secret_key_for_production_use_this_string_minimum_32_characters_long"
+
+      # Postgres local para teste
+      DATABASE_URL: "postgresql://postgres:password@postgres:5432/docmost?schema=public"
+
+      # Redis local deste compose
+      REDIS_URL: "redis://redis:6379"
+
+      # Configuração básica para teste local
+      STORAGE_DRIVER: "local"
+      FILE_UPLOAD_SIZE_LIMIT: "50mb"
+
+      # Email configuração completa para desenvolvimento
+      MAIL_DRIVER: "smtp"
+      SMTP_HOST: "localhost"
+      SMTP_PORT: "25"
+      SMTP_USERNAME: ""
+      SMTP_PASSWORD: ""
+      SMTP_SECURE: "false"
+      MAIL_FROM_ADDRESS: "noreply@localhost"
+      MAIL_FROM_NAME: "Docmost Local"
+
+    ports:
+      - "3000:3000"
+    networks:
+      - test-network
+
+  postgres:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: docmost
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - test-network
+
+  redis:
+    image: redis:7.2-alpine
+    restart: unless-stopped
+    command: ["redis-server", "--save", "", "--appendonly", "no"]
+    ports:
+      - "6379:6379"
+    networks:
+      - test-network
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  test-network:
+    driver: bridge
