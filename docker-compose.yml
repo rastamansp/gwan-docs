@@ -12,36 +12,36 @@ services:
       - redis
     environment:
       # URL pública
-      APP_URL: "https://docs.gwan.com.br"
+      APP_URL: "${APP_URL}"
       # Gere um segredo forte
-      APP_SECRET: "pazdedeus@2025_gwan_docmost_secret_key_for_production_use_this_string_minimum_32_characters_long"
+      APP_SECRET: "${APP_SECRET}"
 
       # Postgres próprio
-      DATABASE_URL: "postgresql://postgres:pazdedeus@postgres.gwan.com.br:5433/gwan?schema=public"
+      DATABASE_URL: "${DATABASE_URL}"
 
       # Redis local deste compose
       REDIS_URL: "redis://redis:6379"
 
       # Armazenamento em MinIO (S3 compatible)
-      STORAGE_DRIVER: "s3"
-      AWS_S3_ACCESS_KEY_ID: "admin"
-      AWS_S3_SECRET_ACCESS_KEY: "pazdeDeus@2025"
-      AWS_S3_REGION: "us-east-1"        # qualquer valor; MinIO ignora região
-      AWS_S3_BUCKET: "docmost"          # crie esse bucket no MinIO
-      AWS_S3_ENDPOINT: "http://minio.gwan.com.br"
-      AWS_S3_FORCE_PATH_STYLE: "true"
+      STORAGE_DRIVER: "${STORAGE_DRIVER}"
+      AWS_S3_ACCESS_KEY_ID: "${AWS_S3_ACCESS_KEY_ID}"
+      AWS_S3_SECRET_ACCESS_KEY: "${AWS_S3_SECRET_ACCESS_KEY}"
+      AWS_S3_REGION: "${AWS_S3_REGION}"
+      AWS_S3_BUCKET: "${AWS_S3_BUCKET}"
+      AWS_S3_ENDPOINT: "${AWS_S3_ENDPOINT}"
+      AWS_S3_FORCE_PATH_STYLE: "${AWS_S3_FORCE_PATH_STYLE}"
       # Opcional: limite de upload
-      FILE_UPLOAD_SIZE_LIMIT: "50mb"
+      FILE_UPLOAD_SIZE_LIMIT: "${FILE_UPLOAD_SIZE_LIMIT}"
 
       # SMTP (ajuste para o seu provedor, indispensável para convites/reset de senha)
-      MAIL_DRIVER: "smtp"
-      SMTP_HOST: "smtp.hostinger.com"
-      SMTP_PORT: "465"
-      SMTP_USERNAME: "pedro.almeida@gwan.com.br"
-      SMTP_PASSWORD: "pazdedeus@2025"
-      SMTP_SECURE: "true"
-      MAIL_FROM_ADDRESS: "pedro.almeida@gwan.com.br"
-      MAIL_FROM_NAME: "Docmost - Gwan"
+      MAIL_DRIVER: "${MAIL_DRIVER}"
+      SMTP_HOST: "${SMTP_HOST}"
+      SMTP_PORT: "${SMTP_PORT}"
+      SMTP_USERNAME: "${SMTP_USERNAME}"
+      SMTP_PASSWORD: "${SMTP_PASSWORD}"
+      SMTP_SECURE: "${SMTP_SECURE}"
+      MAIL_FROM_ADDRESS: "${MAIL_FROM_ADDRESS}"
+      MAIL_FROM_NAME: "${MAIL_FROM_NAME}"
 
     networks:
       - gwan

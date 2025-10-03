@@ -21,22 +21,28 @@ git clone https://github.com/rastamansp/gwan-docs.git
 cd gwan-docs
 ```
 
-2. Copie o arquivo de configuração:
+2. Para **desenvolvimento local**:
 ```bash
+# Copie o arquivo de configuração de desenvolvimento
 cp .env.example .env
+
+# Execute com docker-compose de teste
+docker-compose -f docker-compose.test.yml up -d
 ```
 
-3. Configure as variáveis de ambiente no arquivo `.env` (opcional)
-
-4. Execute o projeto:
+3. Para **produção**:
 ```bash
+# Copie o arquivo de configuração de produção
+cp .env.production .env
+
+# Configure suas variáveis específicas no .env
+# Execute o projeto de produção
 docker-compose up -d
 ```
 
-5. Acesse o aplicativo em:
-```
-http://localhost:3000
-```
+4. Acesse o aplicativo em:
+   - **Desenvolvimento**: `http://localhost:3000`
+   - **Produção**: `https://docs.gwan.com.br`
 
 ## Recursos
 
