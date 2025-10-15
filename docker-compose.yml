@@ -3,6 +3,10 @@ version: "3.9"
 # Carregar variáveis do arquivo .env
 # Certifique-se de ter o arquivo .env no diretório do projeto
 
+networks:
+  gwan:
+    external: true
+
 services:
   docmost:
     image: docmost/docmost:latest
